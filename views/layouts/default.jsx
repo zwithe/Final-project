@@ -11,13 +11,10 @@ function App() {
     if(search){
     const fetchData = async () => {
         if(searchBy === 'Author') {
-            let queryUrl = 'https://openlibrary.org/search.json?authors=' + search + '&fields=title,author_name,isbn' + limit + offset
-            await setUrl(queryUrl)
-        } else if(searchBy === 'Subject') {
-            let queryUrl = 'https://openlibrary.org/subjects/' + search + '.json?' + limit + offset
+            let queryUrl = 'https://openlibrary.org/search.json?authors=' + search + '&fields=title,author_name,key,editions' + limit + offset
             await setUrl(queryUrl)
         } else {
-            let queryUrl = 'https://openlibrary.org/search.json?q=' + search + '&fields=title,author_name,isbn' + limit + offset
+            let queryUrl = 'https://openlibrary.org/search.json?q=' + search + '&fields=title,author_name,key,editions' + limit + offset
             await setUrl(queryUrl)
         }
     const response = await fetch(url)

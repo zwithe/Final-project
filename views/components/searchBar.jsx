@@ -11,7 +11,6 @@ function SearchBar(props) {
         <select id="searchBy" name="searchBy" onChange={(e) => setSearchBy(e.target.value)}>
             <option value="Title" selected>Title</option>
             <option value="Author">Author</option>
-            <option value="Subject">Subject</option>
         </select>
         <input type="submit"/>
     </form>
