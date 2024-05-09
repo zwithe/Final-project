@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react'
-
-import SearchBar from 'views\components\searchBar.jsx';
+import {useState, useEffect} from 'react';
+import searchResult from './components/searchResult';
+import SearchBar from './components/searchBar';
 function App() {
   let [message, setMessage] = useState('Search for books')
   let [search, setSearch] = useState('')

@@ -21,3 +21,9 @@ try {
 } catch(err) {
     console.log(`Unable to connect to PG: ${err}`) 
 }
+
+//routes
+const searchController = require('./controllers/search')
+const bookController = require('./controllers/Book')
+app.use('/search', searchController)
+app.use('/books', bookController)
