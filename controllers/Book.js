@@ -1,3 +1,5 @@
+const router = require('express').Router()
+
 router.get('/:id', async (req, res) => {
     const {id} = req.params;
     const descriptionData = await fetch(`https://openlibrary.org/books/${id}.json`)

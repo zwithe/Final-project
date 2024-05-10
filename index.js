@@ -8,9 +8,6 @@ require('dotenv').config()
 const app = express()
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
-app.set('views', __dirname + '/views')
-app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
 
 // SEQUELIZE CONNECTION
 const sequelize = new Sequelize(process.env.PG_URI)
@@ -23,7 +20,3 @@ try {
 }
 
 //routes
-const searchController = require('./controllers/search')
-const bookController = require('./controllers/Book')
-app.use('/search', searchController)
-app.use('/books', bookController)
