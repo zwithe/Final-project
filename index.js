@@ -8,15 +8,26 @@ require('dotenv').config()
 const app = express()
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
 
 // SEQUELIZE CONNECTION
-const sequelize = new Sequelize(process.env.PG_URI)
-
+const PORT = process.env.PORT
+/*const sequelize = new Sequelize(process.env.PG_URI)
 try {
     sequelize.authenticate() 
     console.log(`Connected with Sequelize at ${process.env.PG_URI}`) 
 } catch(err) {
     console.log(`Unable to connect to PG: ${err}`) 
-}
+}*/
 
 //routes
+const searchController = require('./controllers/search')
+const bookController = require('./controllers/Book')
+app.use('/', searchController)
+app.use('/book', bookController)
+
+//response phrase
+app.listen(PORT, console.log(`listening on port ${PORT}`))

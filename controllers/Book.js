@@ -6,3 +6,5 @@ router.get('/:id', async (req, res) => {
     const bookData = await fetch(`https://openlibrary.org/search.json?q=${id}&fields=title,author_name,key,editions`)
     res.render('showBook', {id, descriptionData, bookData})
 })
+
+module.exports = router

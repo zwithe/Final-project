@@ -1,3 +1,6 @@
+const React = require('react')
+const Default = require('./default')
+
 function searchResult ({data, page}){
     let searchDisplay = data.docs.map(books =>{
     let olid = books.editons.docs.key.slice(6,0)
@@ -16,6 +19,7 @@ function searchResult ({data, page}){
     )})
     if(page > 1){
         return(
+        <Default>
                 <div>
                   <form action='/search/1' method='GET'>
                       <label for="searchbar"></label>
@@ -36,9 +40,11 @@ function searchResult ({data, page}){
                    </form>
                   </div>
                 </div>
+        </Default>
         )
     } else {
         return (
+        <Default>
             <div>
               <form action='/search/1' method='GET'>
                   <label for="searchbar"></label>
@@ -55,6 +61,7 @@ function searchResult ({data, page}){
               </form>
               </div>
             </div>
+        </Default>
           )
     }
 }

@@ -18,6 +18,6 @@ router.get('/search/:page', async (req,res) => {
     }
 })  
 
-
+module.exports = router
 
     

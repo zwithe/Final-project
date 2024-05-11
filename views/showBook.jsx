@@ -10,18 +10,21 @@ function showBook ({id, bookData, descriptionData}){
             return newDescription
         }
         filterDescription(rawDescription)
-  return(
-    <div>
-        <img src={`https://covers.openlibrary.org/b/olid/${id}-L.jpg`}/>
-        <h2>{bookData.docs[0].title}</h2>
-        <h3>{bookData.docs[0].author_name.forEach(authors => {
-            return(
-                <b>{authors}</b>
-            )})}
-        </h3>
-        <h3>{newDescription}</h3>
-    </div>
-  )
+        
+    return(
+    <Default>
+        <div>
+            <img src={`https://covers.openlibrary.org/b/olid/${id}-L.jpg`}/>
+            <h2>{bookData.docs[0].title}</h2>
+            <h3>{bookData.docs[0].author_name.forEach(authors => {
+                return(
+                    <b>{authors}</b>
+                )})}
+            </h3>
+            <h3>{newDescription}</h3>
+        </div>
+    </Default>
+    )
 }
 
 module.exports = showBook
