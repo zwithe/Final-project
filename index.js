@@ -24,10 +24,10 @@ try {
 }*/
 
 //routes
-const searchController = require('./controllers/search')
+const searchController = require('./controllers/Search')
 const bookController = require('./controllers/Book')
-app.use('/', searchController)
-app.use('/book', bookController)
+app.use('/search', searchController)
+app.use('/books', bookController)
 
 //response phrase
 app.listen(PORT, console.log(`listening on port ${PORT}`))

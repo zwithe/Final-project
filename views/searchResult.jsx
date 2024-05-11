@@ -1,67 +1,78 @@
 const React = require('react')
 const Default = require('./default')
 
-function searchResult ({data, page}){
+function searchResult ({data, page, search}){
+    let pageNumber = Number(page)
+    let oldSearch = search.replaceAll('+', ' ')
     let searchDisplay = data.docs.map(books =>{
-    let olid = books.editons.docs.key.slice(6,0)
-    return(
-        <div className='card' key={books.key}>
-            <a href={`${books.key}`}>
-            <img src={`https://covers.openlibrary.org/b/olid/${olid}-L.jpg`}/>
-            <h3>{books.title}</h3>
-            <h3>{books.author_name.forEach(authors => {
-                return(
-                <p>{authors}</p>
-                )})}
-            </h3>
-            </a>    
-        </div>
-    )})
-    if(page > 1){
-        return(
-        <Default>
-                <div>
-                  <form action='/search/1' method='GET'>
-                      <label for="searchbar"></label>
-                      <input type="text" id="searchbar" name="searchbar" placeholder="search here"/>
-                      <input type="submit"/>
-                  </form>
-                  <div>
-                        {searchDisplay}
-                  </div>
-                  <div>
-                  <form action={`/search/${number(page) + 1}`} method='GET'>
-                      <label for="nextpage"></label>
-                      <input type="submit" id="nextpage" name="nextpage"/>
-                  </form>
-                  <form action={`/search/${number(page) - 1}`} method='GET'>
-                        <label for="previouspage"></label>
-                        <input type="submit" id="previouspage" name="previouspage"/>
-                   </form>
-                  </div>
+        if(undefined === books.author_name || undefined === books.title || undefined === books.editions.docs[0]){
+
+        } else{
+            let olid = books.editions.docs[0].key.slice(7)
+            
+            return(
+                <div className='card' key={books.editions.docs[0].key}>
+                    <a href={`${books.editions.docs[0].key}`}>
+                    <img src={`https://covers.openlibrary.org/b/olid/${olid}-L.jpg`} alt='Cover Page'/>
+                    <h3>{books.title}</h3>
+                    <h3>{books.author_name.map(authors => {
+                        return(
+                        <p key={authors}>{authors}</p>
+                        )})}
+                    </h3>
+                    </a>    
                 </div>
-        </Default>
+        )}})
+    if(pageNumber > 1){
+        return(
+            <Default>
+                    <div>
+                    <form action='/search/result/1' method='GET'>
+                        <label htmlFor="searchbar"></label>
+                        <input type="text" id="searchbar" name="searchbar" placeholder="search here"/>
+                        <input type="submit"/>
+                    </form>
+                    <div>
+                            {searchDisplay}
+                    </div>
+                    <div>
+                    <form action={`/search/result/${pageNumber + 1}`} method='GET'>
+                        <label htmlFor={'nextbutton'}></label>
+                        <input type='text' name='searchbar' value={`${oldSearch}`} className='hidden' readOnly='true'/>
+                        <input type="submit" id={'nextbutton'}/>
+                    </form>
+                    <form action={`/search/result/${pageNumber - 1}`} method='GET'>
+                            <label htmlFor="previouspage"></label>
+                            <input type='text' name='searchbar' value={`${oldSearch}`} className='hidden' readOnly='true'/>
+                            <input type="submit" id="previouspage" />
+                    </form>
+                    </div>
+                    </div>
+            </Default>
         )
     } else {
         return (
-        <Default>
-            <div>
-              <form action='/search/1' method='GET'>
-                  <label for="searchbar"></label>
-                  <input type="text" id="searchbar" name="searchbar" placeholder="search here"/>
-                  <input type="submit"/>
-              </form>
-              <div>
-                    {searchDisplay}
-              </div>
-              <div>
-              <form action={`/search/${number(page) + 1}`} method='GET'>
-                  <label for="nextpage"></label>
-                  <input type="submit" id="nextpage" name="nextpage"/>
-              </form>
-              </div>
-            </div>
-        </Default>
-          )
+            <Default>
+                <div>
+                <form action='/search/result/1' method='GET'>
+                    <label htmlFor="searchbar"></label>
+                    <input type="text" id="searchbar" name="searchbar" placeholder="search here"/>
+                    <input type="submit"/>
+                </form>
+                <div>
+                        {searchDisplay}
+                </div>
+                <div>
+                <form action={`/search/result/${pageNumber + 1}`} method='GET'>
+                    <label htmlFor={'nextbutton'}></label>
+                    <input type='text' name='searchbar' value={`${oldSearch}`} className='hidden' readOnly='true'/>
+                    <input type="submit" id={'nextbutton'} value={`Next`}/>
+                </form>
+                </div>
+                </div>
+            </Default>
+        )
     }
 }
+
+module.exports = searchResult
