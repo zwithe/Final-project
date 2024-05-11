@@ -1,5 +1,3 @@
-const React = require('react')
-
 
 function showBook ({id, bookData, descriptionData}){
         //TODO process description data with regex //[a-z]

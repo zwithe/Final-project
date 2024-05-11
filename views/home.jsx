@@ -3,8 +3,9 @@ function App() {
 
   return (
     <div>
-      <form >
-          <input type="text" placeholder="search here"/>
+      <form action='/search/1' method='GET'>
+          <label for="searchbar"></label>
+          <input type="text" id="searchbar" name="searchbar" placeholder="search here"/>
           <input type="submit"/>
       </form>
     </div>

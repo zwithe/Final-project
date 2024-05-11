@@ -5,16 +5,19 @@ router.get('/', (req,res)=>{
 })
 
 
-router.get('/:query/:page', async (req,res) => {
-    let {search, page}= req.params
+router.get('/search/:page', async (req,res) => {
+    let  page = req.params
+    let search = await URLSearchParams.get('searchbar')
     let queryUrl = 'https://openlibrary.org/search.json?authors=' + search + '&fields=title,author_name,key,editions&limit=20&page=' + page
     const response = await fetch(queryUrl)
     const data = await response.json()
     if(data.docs.length > 0){
-        res.render('searchResult', { data })
+        res.render('searchResult', { data, page })
     } else{
         //TODO display oops no books or something
     }
 })  
+
+
 
     
