@@ -27,23 +27,18 @@ function searchResult ({data, page, search}){
         return(
             <Default>
                     <div>
-                    <form action='/search/result/1' method='GET'>
-                        <label htmlFor="searchbar"></label>
-                        <input type="text" id="searchbar" name="searchbar" placeholder="search here"/>
-                        <input type="submit"/>
-                    </form>
                     <div>
                             {searchDisplay}
                     </div>
                     <div>
                     <form action={`/search/result/${pageNumber + 1}`} method='GET'>
                         <label htmlFor={'nextbutton'}></label>
-                        <input type='text' name='searchbar' value={`${oldSearch}`} className='hidden' readOnly='true'/>
+                        <input type='text' name='q' value={`${oldSearch}`} className='hidden' readOnly={true}/>
                         <input type="submit" id={'nextbutton'}/>
                     </form>
                     <form action={`/search/result/${pageNumber - 1}`} method='GET'>
                             <label htmlFor="previouspage"></label>
-                            <input type='text' name='searchbar' value={`${oldSearch}`} className='hidden' readOnly='true'/>
+                            <input type='text' name='q' value={`${oldSearch}`} className='hidden' readOnly={true}/>
                             <input type="submit" id="previouspage" />
                     </form>
                     </div>
@@ -54,18 +49,13 @@ function searchResult ({data, page, search}){
         return (
             <Default>
                 <div>
-                <form action='/search/result/1' method='GET'>
-                    <label htmlFor="searchbar"></label>
-                    <input type="text" id="searchbar" name="searchbar" placeholder="search here"/>
-                    <input type="submit"/>
-                </form>
                 <div>
                         {searchDisplay}
                 </div>
                 <div>
                 <form action={`/search/result/${pageNumber + 1}`} method='GET'>
                     <label htmlFor={'nextbutton'}></label>
-                    <input type='text' name='searchbar' value={`${oldSearch}`} className='hidden' readOnly='true'/>
+                    <input type='text' name='q' value={`${oldSearch}`} className='hidden' readOnly={true}/>
                     <input type="submit" id={'nextbutton'} value={`Next`}/>
                 </form>
                 </div>

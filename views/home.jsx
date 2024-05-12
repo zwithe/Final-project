@@ -14,7 +14,7 @@ function App() {
         <div>
           <form action='/search/result/1' method='GET'>
               <label htmlFor="searchbar"></label>
-              <input type="text" id="searchbar" name="searchbar" placeholder="search here"/>
+              <input type="text" id="searchbar" name="q" placeholder="search here"/>
               <input type="submit"/>
           </form>
         </div>
