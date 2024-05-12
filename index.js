@@ -4,6 +4,7 @@ const methodOverride = require('method-override')
 const { Sequelize } = require('sequelize')
 require('dotenv').config()
 
+
 // CONFIGURATION / MIDDLEWARE
 const app = express()
 app.use(methodOverride('_method'))
@@ -26,8 +27,9 @@ try {
 //routes
 const searchController = require('./controllers/Search')
 const bookController = require('./controllers/Book')
+const usersController = require('./controllers/users')
 app.use('/search', searchController)
 app.use('/books', bookController)
-
+app.use('/users', usersController)
 //response phrase
 app.listen(PORT, console.log(`listening on port ${PORT}`))

@@ -1,10 +1,16 @@
 const React = require('react')
-const Default = require('./default')
+
 
 function App() {
 
   return (
-    <Default>
+    <html>
+    <head>
+      <title>Default</title>
+      <link rel="stylesheet" href="/main.css"></link>
+    </head>
+    <body>
+      <div>
         <div>
           <form action='/search/result/1' method='GET'>
               <label htmlFor="searchbar"></label>
@@ -12,7 +18,9 @@ function App() {
               <input type="submit"/>
           </form>
         </div>
-    </Default>
+      </div>
+    </body>
+  </html>
   )
 }
   export default App;
