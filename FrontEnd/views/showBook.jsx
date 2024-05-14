@@ -2,7 +2,6 @@ const React = require('react')
 const Default = require('./default')
 
 function showBook ({id, bookData, descriptionData}){
-        //TODO if else to check for descriptions and if there is none post with out it
     if(descriptionData.description === undefined){
         return(
             <Default>

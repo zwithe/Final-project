@@ -27,7 +27,7 @@ try {
 //routes
 const searchController = require('./controllers/Search')
 const bookController = require('./controllers/Book')
-const usersController = require('./controllers/users')
+const usersController = require('./controllers/Users')
 app.use('/search', searchController)
 app.use('/books', bookController)
 app.use('/users', usersController)
