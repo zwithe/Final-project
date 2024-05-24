@@ -4,7 +4,7 @@ const Default = require('./default')
 function showBook ({id, bookData, descriptionData}){
     if(descriptionData.description === undefined){
         return(
-            <Default>
+        
                 <div>
                     <img src={`https://covers.openlibrary.org/b/olid/${id}-L.jpg`}/>
                     <h2>{bookData.docs[0].title}</h2>
@@ -15,7 +15,7 @@ function showBook ({id, bookData, descriptionData}){
                     </h3>
                     <h3>This book has no description listed</h3>
                 </div>
-            </Default>
+            
         )
     } else {
         let rawDescription = descriptionData.description.value
@@ -31,7 +31,7 @@ function showBook ({id, bookData, descriptionData}){
             )
         }    
         return(
-        <Default>
+    
             <div>
                 <img src={`https://covers.openlibrary.org/b/olid/${id}-L.jpg`}/>
                 <h2>{bookData.docs[0].title}</h2>
@@ -42,7 +42,7 @@ function showBook ({id, bookData, descriptionData}){
                 </h3>
                 <h3>{filterDescription(rawDescription)}</h3>
             </div>
-        </Default>
+        
         )}
 }
 

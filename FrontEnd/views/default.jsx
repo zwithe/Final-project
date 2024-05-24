@@ -1,7 +1,7 @@
 const React = require('react')
 
-function Default(html) {
-  
+function Default(handleSearch) {
+  let [searchTerm, setSearchTerm] = useState('')
   return (
     <html>
     <head>
@@ -13,9 +13,9 @@ function Default(html) {
         <nav>
           <ul>
             <li>          
-              <form action='/search/result/1' method='GET'>
+              <form onSubmit={(e) => handleSearch(e, searchTerm)} >
                 <label htmlFor="searchbar"></label>
-                <input type="text" id="searchbar" name="q" placeholder="search here"/>
+                <input type="text" id="searchbar" name="q" onChange={(e) => setSearchTerm(e.target.value)} placeholder="search here"/>
                 <input type="submit"/>
               </form>
             </li>

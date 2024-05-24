@@ -1,9 +1,15 @@
 const React = require('react')
 const Default = require('./default')
+import { useState, useEffect, useContext } from 'react'
+import { useHistory } from "react-router";
+import { CurrentUser } from './contexts/CurrentUser';
 
-function searchResult ({data, page, search}){
-    let pageNumber = Number(page)
-    let oldSearch = search.replaceAll('+', ' ')
+
+function searchResult ({data, handlePage, handleShow}){
+
+    const history = useHistory()
+    let [nextPage, setNextPage] = useState()
+
     let searchDisplay = data.docs.map(books =>{
         if(undefined === books.author_name || undefined === books.title || undefined === books.editions.docs[0]){
 
@@ -12,7 +18,7 @@ function searchResult ({data, page, search}){
             
             return(
                 <div className='card' key={books.editions.docs[0].key}>
-                    <a href={`${books.editions.docs[0].key}`}>
+                     <a href="#" onClick={handleShow(e, olid)/*passing olid may not work here still worth a shot*/}>
                     <img src={`https://covers.openlibrary.org/b/olid/${olid}-L.jpg`} alt='Cover Page'/>
                     <h3>{books.title}</h3>
                     <h3>{books.author_name.map(authors => {
@@ -25,42 +31,39 @@ function searchResult ({data, page, search}){
         )}})
     if(pageNumber > 1){
         return(
-            <Default>
+        
                     <div>
                     <div>
                             {searchDisplay}
                     </div>
                     <div>
-                    <form action={`/search/result/${pageNumber + 1}`} method='GET'>
-                        <label htmlFor={'nextbutton'}></label>
-                        <input type='text' name='q' value={`${oldSearch}`} className='hidden' readOnly={true}/>
-                        <input type="submit" id={'nextbutton'}/>
+                    <form onSubmit={handlePage(e, nextPage)}>
+                        <label htmlFor={'nextPage'}></label>
+                        <input type="submit" id={'nextPage'} onClick={() => setNextPage(true)}/>
                     </form>
-                    <form action={`/search/result/${pageNumber - 1}`} method='GET'>
-                            <label htmlFor="previouspage"></label>
-                            <input type='text' name='q' value={`${oldSearch}`} className='hidden' readOnly={true}/>
-                            <input type="submit" id="previouspage" />
+                    <form onSubmit={handlePage(e, nextPage)}>
+                            <label htmlFor="previousPage"></label> 
+                            <input type="submit" id="previousPage" onClick={() => setNextPage(false)} />
                     </form>
                     </div>
                     </div>
-            </Default>
+            
         )
     } else {
         return (
-            <Default>
+        
                 <div>
                 <div>
                         {searchDisplay}
                 </div>
                 <div>
-                <form action={`/search/result/${pageNumber + 1}`} method='GET'>
-                    <label htmlFor={'nextbutton'}></label>
-                    <input type='text' name='q' value={`${oldSearch}`} className='hidden' readOnly={true}/>
-                    <input type="submit" id={'nextbutton'} value={`Next`}/>
+                <form onSubmit={handlePage(e, nextPage)}>
+                    <label htmlFor={'nextPage'}></label>
+                    <input type="submit" id={'nextPage'} onClick={(e) => setNextPage(true)} value={`Next`}/>
                 </form>
                 </div>
                 </div>
-            </Default>
+            
         )
     }
 }
