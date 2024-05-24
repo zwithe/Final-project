@@ -5,14 +5,7 @@ function LoginForm() {
     return (
         <main>
             <h1>Login</h1>
-            {errorMessage !== null
-                ? (
-                    <div className="alert alert-danger" role="alert">
-                        {errorMessage}
-                    </div>
-                )
-                : null
-            }
+
             <form>
                 <div className="row">
                     <div>

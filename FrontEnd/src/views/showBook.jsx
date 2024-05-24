@@ -1,7 +1,7 @@
-const React = require('react')
-const Default = require('./default')
 
-function showBook ({id, bookData, descriptionData}){
+
+
+function ShowBook ({id, bookData, descriptionData}){
     if(descriptionData.description === undefined){
         return(
         
@@ -24,8 +24,6 @@ function showBook ({id, bookData, descriptionData}){
             let tagsRemoved = removeTags.replaceAll(/\/[A-Za-z]/g, '');
             let removeCover = tagsRemoved;
             let newDescription = removeCover.replaceAll(/--back cover/g, '');
-            console.log(tagsRemoved)
-            console.log(newDescription)
             return (
                 <p>{newDescription}</p>
             )
@@ -46,4 +44,4 @@ function showBook ({id, bookData, descriptionData}){
         )}
 }
 
-module.exports = showBook
+export default ShowBook;

@@ -1,12 +1,12 @@
-const React = require('react')
-const Default = require('./default')
+
+
 
 function NewReviewForm({ olid }) {
 
 
 
     return (
-    <Default>
+
         <form >
             <div>
                 <div>
@@ -38,7 +38,7 @@ function NewReviewForm({ olid }) {
             </div>
             <input className="btn btn-primary" type="submit" value="Add Comment" />
         </form>
-    </Default>    
+        
     )
 }
 

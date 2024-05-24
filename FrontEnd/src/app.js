@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import {useState, useEffect, useHistory} from 'react'
-import Home from './home'
-import Error404 from './Error404'
+import {useState, useEffect} from 'react'
+import { useHistory } from "react-router"
+import Home from './views/home'
 import signUp from './views/signUp'
 import login from './views/login'
 import Default from './views/default'
@@ -65,20 +65,20 @@ const handleShow = async (e, olid) => {
   setData(bookData)
   history.push(`/books/${id}`)
 }
+//TODO add <ContextProvider> wrapper around when implemnted
   return (
-    <ContextProvider>
+  
       <BrowserRouter>
         <Default handleSearch={handleSearch}/>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/sign-up" component={signUp} />
           <Route exact path="/login" component={login} />
-          <Route exact path="/result/:page" component={searchResult} data={data} handlePage={handlePage} handleShow={handleShow}/>
+          <Route exact path="/result/:page" component={searchResult} data={data} page={page} handlePage={handlePage} handleShow={handleShow}/>
           <Route exact path="/books/:id" component={showBook} id={id} bookData={data} descriptionData={descriptionData} />
-          <Route path="/" component={Error404} />
         </Switch>
       </BrowserRouter>
-    </ContextProvider>
+    
   );
 }
 

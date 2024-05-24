@@ -2,18 +2,21 @@
 const express = require("express")
 const methodOverride = require('method-override')
 const { Sequelize } = require('sequelize')
+const cors = require('cors')
 require('dotenv').config()
 
 
 // CONFIGURATION / MIDDLEWARE
 const app = express()
+app.use(cors())
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
+/* may not be nesscesary
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
-
+*/
 // SEQUELIZE CONNECTION
 const PORT = process.env.PORT
 /*const sequelize = new Sequelize(process.env.PG_URI)

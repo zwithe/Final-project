@@ -1,15 +1,11 @@
-const React = require('react')
-const Default = require('./default')
-import { useState, useEffect, useContext } from 'react'
-import { useHistory } from "react-router";
-import { CurrentUser } from './contexts/CurrentUser';
+import { useState } from "react";
 
 
-function searchResult ({data, handlePage, handleShow}){
 
-    const history = useHistory()
-    let [nextPage, setNextPage] = useState()
 
+function SearchResult ({data, page, handlePage, handleShow}){
+    const [nextPage, setNextPage] = useState('')
+    let pageNumber = Number(page)
     let searchDisplay = data.docs.map(books =>{
         if(undefined === books.author_name || undefined === books.title || undefined === books.editions.docs[0]){
 
@@ -18,7 +14,7 @@ function searchResult ({data, handlePage, handleShow}){
             
             return(
                 <div className='card' key={books.editions.docs[0].key}>
-                     <a href="#" onClick={handleShow(e, olid)/*passing olid may not work here still worth a shot*/}>
+                     <a href="#" onClick={e => handleShow(e, olid)/*passing olid may not work here still worth a shot*/}>
                     <img src={`https://covers.openlibrary.org/b/olid/${olid}-L.jpg`} alt='Cover Page'/>
                     <h3>{books.title}</h3>
                     <h3>{books.author_name.map(authors => {
@@ -37,11 +33,11 @@ function searchResult ({data, handlePage, handleShow}){
                             {searchDisplay}
                     </div>
                     <div>
-                    <form onSubmit={handlePage(e, nextPage)}>
+                    <form onSubmit={e => handlePage(e, nextPage)}>
                         <label htmlFor={'nextPage'}></label>
                         <input type="submit" id={'nextPage'} onClick={() => setNextPage(true)}/>
                     </form>
-                    <form onSubmit={handlePage(e, nextPage)}>
+                    <form onSubmit={e => handlePage(e, nextPage)}>
                             <label htmlFor="previousPage"></label> 
                             <input type="submit" id="previousPage" onClick={() => setNextPage(false)} />
                     </form>
@@ -57,7 +53,7 @@ function searchResult ({data, handlePage, handleShow}){
                         {searchDisplay}
                 </div>
                 <div>
-                <form onSubmit={handlePage(e, nextPage)}>
+                <form onSubmit={e => handlePage(e, nextPage)}>
                     <label htmlFor={'nextPage'}></label>
                     <input type="submit" id={'nextPage'} onClick={(e) => setNextPage(true)} value={`Next`}/>
                 </form>
@@ -68,4 +64,4 @@ function searchResult ({data, handlePage, handleShow}){
     }
 }
 
-module.exports = searchResult
+export default SearchResult;
